@@ -17,7 +17,7 @@ services:
       # volumes:
       #- ${PWD}/.users.yaml:/config/.users.yaml
 
-      # DEFAULT_USER_ENABLED: false # Uncomment this line to disable the creation of the default user
+      DEFAULT_USER_ENABLED: false # Uncomment this line to disable the creation of the default user
       # DEFAULT_USER_PASSWORD: custom-password # Uncomment this line to set a custom password for the default user
       # DEFAULT_USER_API_KEY: custom-api-key # Uncomment this line to set a custom api-key for the default user
     networks:
