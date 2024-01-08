@@ -1,0 +1,19 @@
+[Unit]
+Description=Docker Compose Application Service
+Requires=docker.service
+After=docker.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/home/argilla-admin/argilla-sml
+ExecStart=docker compose up -d
+ExecStop=docker compose stop
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
