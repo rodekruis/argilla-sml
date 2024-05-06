@@ -35,6 +35,7 @@ services:
       - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
       - cluster.routing.allocation.disk.threshold_enabled=false
       - xpack.security.enabled=false
+      - indices.breaker.request.limit=100%
     ulimits:
       memlock:
         soft: -1
