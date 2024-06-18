@@ -23,3 +23,9 @@ sudo systemctl enable docker-compose-argilla
 > When installed for the first time, argilla creates a default user `argilla` with password `1234`; make sure to delete it and create a new user, using `fix_users.py`.
 > For more information, see [user management](https://docs.argilla.io/en/latest/getting_started/installation/configurations/user_management.html).
 
+### Server Configuration
+To ensure secure connection (HTTPS) to Argilla:
+* [Install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#2-installing-nginx)
+* [Port forward in nginx](https://stackoverflow.com/a/46067132/1753041) 80 -> 6900
+* [Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+* Create a new domain name (myargilla.510.global) and point it to the VM's IP
