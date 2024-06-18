@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   argilla:
-    image: argilla/argilla-server:latest
+    image: argilla/argilla-server:releases-1.29.0
     restart: unless-stopped
     ports:
       - "6900:6900"
@@ -17,7 +17,7 @@ services:
       # volumes:
       #- ${PWD}/.users.yaml:/config/.users.yaml
 
-      DEFAULT_USER_ENABLED: false # Uncomment this line to disable the creation of the default user
+      # DEFAULT_USER_ENABLED: false # Uncomment this line to disable the creation of the default user
       # DEFAULT_USER_PASSWORD: custom-password # Uncomment this line to set a custom password for the default user
       # DEFAULT_USER_API_KEY: custom-api-key # Uncomment this line to set a custom api-key for the default user
     networks:
