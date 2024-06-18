@@ -29,3 +29,32 @@ To ensure secure connection (HTTPS) to Argilla:
 * [Port forward in nginx](https://eladnava.com/binding-nodejs-port-80-using-nginx/) 80 -> 6900
 * [Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
 * Create a new domain name (myargilla.510.global) and point it to the VM's IP
+
+To ensure that the certificate is automatically renewed
+
+Create `/etc/systemd/system/certbot.service`
+```
+[Unit]
+Description=Let's Encrypt renewal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos
+ExecStartPost=/bin/systemctl reload nginx
+```
+Create `/etc/systemd/system/certbot.timer`
+```
+[Unit]
+Description=Timer for Certbot Renewal
+
+[Timer]
+OnBootSec=300
+OnUnitActiveSec=1w
+
+[Install]
+WantedBy=multi-user.target
+```
+Run
+```commandline
+systemctl enable --now certbot.timer
+```
