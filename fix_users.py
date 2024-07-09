@@ -21,9 +21,5 @@ user = rg.User.create(
 default_user = rg.User.from_name("argilla")
 default_user.delete()
 
-# remove default workspace
-workspace = rg.Workspace.from_name("argilla")
-workspace.delete()
-
 
 

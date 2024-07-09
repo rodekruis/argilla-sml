@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   argilla:
-    image: argilla/argilla-server:releases-1.29.0
+    image: argilla/argilla-server:releases-1.28.0
     restart: unless-stopped
     ports:
       - "6900:6900"
