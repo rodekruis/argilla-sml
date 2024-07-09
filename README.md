@@ -24,8 +24,9 @@ sudo systemctl enable docker-compose-argilla
 > For more information, see [user management](https://docs.argilla.io/en/latest/getting_started/installation/configurations/user_management.html).
 
 ### Server Configuration
-To ensure secure connection (HTTPS) to Argilla:
+To ensure secure connection (SSL) to Argilla:
 
+#### 1. Install and configure nginx
 Install nginx
 ```commandline
 sudo apt update
@@ -52,10 +53,13 @@ Run
 sudo ln -s /etc/nginx/sites-available/sml /etc/nginx/sites-enabled/sml
 sudo service nginx restart
 ```
-3. [Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
-4. Create a new domain name (`my.argilla.url.com`) and point it to the VM's IP
+#### 2. Install certbot
+[Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+#### 3. Set up domain name
+Create a new domain name (`my.argilla.url.com`) and point it to the VM's IP
 
-To ensure that the certificate is automatically renewed:
+#### 4. Automatic certificate renewal
+To ensure that the SSL certificate is automatically renewed:
 
 Create `/etc/systemd/system/certbot.service`
 ```
