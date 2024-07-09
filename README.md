@@ -25,12 +25,37 @@ sudo systemctl enable docker-compose-argilla
 
 ### Server Configuration
 To ensure secure connection (HTTPS) to Argilla:
-* [Install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#2-installing-nginx)
-* [Port forward in nginx](https://eladnava.com/binding-nodejs-port-80-using-nginx/) 80 -> 6900
-* [Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
-* Create a new domain name (myargilla.510.global) and point it to the VM's IP
 
-To ensure that the certificate is automatically renewed
+Install nginx
+```commandline
+sudo apt update
+sudo apt install nginx
+```
+Run
+```commandline
+sudo rm /etc/nginx/sites-enabled/default
+```
+Create `/etc/nginx/sites-available/sml`
+```
+server {
+    server_name my.argilla.url.com;
+
+    location / {
+        proxy_set_header   X-Forwarded-For $remote_addr;
+        proxy_set_header   Host $http_host;
+        proxy_pass         "http://127.0.0.1:6900";
+    }
+}
+```
+Run
+```commandline
+sudo ln -s /etc/nginx/sites-available/sml /etc/nginx/sites-enabled/sml
+sudo service nginx restart
+```
+3. [Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+4. Create a new domain name (`my.argilla.url.com`) and point it to the VM's IP
+
+To ensure that the certificate is automatically renewed:
 
 Create `/etc/systemd/system/certbot.service`
 ```
