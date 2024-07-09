@@ -54,36 +54,6 @@ sudo ln -s /etc/nginx/sites-available/sml /etc/nginx/sites-enabled/sml
 sudo service nginx restart
 ```
 #### 2. Install certbot
-[Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+[Install and run certbot](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04). This will also take care of renewing the certificate.
 #### 3. Set up domain name
 Create a new domain name (`my.argilla.url.com`) and point it to the VM's IP
-
-#### 4. Automatic certificate renewal
-To ensure that the SSL certificate is automatically renewed:
-
-Create `/etc/systemd/system/certbot.service`
-```
-[Unit]
-Description=Let's Encrypt renewal
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/certbot renew --quiet --agree-tos
-ExecStartPost=/bin/systemctl reload nginx
-```
-Create `/etc/systemd/system/certbot.timer`
-```
-[Unit]
-Description=Timer for Certbot Renewal
-
-[Timer]
-OnBootSec=300
-OnUnitActiveSec=1w
-
-[Install]
-WantedBy=multi-user.target
-```
-Run
-```commandline
-systemctl enable --now certbot.timer
-```
