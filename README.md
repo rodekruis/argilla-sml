@@ -20,7 +20,7 @@ sudo mv docker-compose-argilla.service /etc/systemd/system/
 sudo systemctl enable docker-compose-argilla
 ```
 > [!WARNING]
-> When installed for the first time, argilla creates a default user `argilla` with password `1234`; make sure to delete it and create a new user, using `fix_users.py`.
+> When installed for the first time, argilla creates a default user `argilla` with password `1234`; make sure to delete it and create a new user, using `fix_users.py`. After doing this, uncomment the line in `docker-compose.yaml` containing `DEFAULT_USER_ENABLED: false`, otherwise `docker compose up -d` will fail when the VM reboots.
 > For more information, see [user management](https://docs.argilla.io/en/latest/getting_started/installation/configurations/user_management.html).
 
 ### Server Configuration
